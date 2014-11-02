@@ -1,0 +1,33 @@
+# ZNC, logstash, and Kibana for Docker with SSL
+
+* Run the [ZNC](http://znc.in) IRC Bouncer in a Docker container. 
+
+* View chat logs using Kibana
+
+
+## Set up ZNC bouncer
+
+1. Make a default znc config directory: (e.g `mkdir znc-default`.)
+2. Create a [signed SSL cert](http://wiki.znc.in/Signed_SSL_certificate) named `znc.pem` inside the `znc-default` directory.
+3. Update znc.yml to use the path to znc-default
+
+After you have done this, simply run 
+
+`ansible-playbook znc.yml -vvvv`
+
+(The `-vvvv` argument sets ansible logging to the most verbose mode, which includes connection debugging. If this is not needed, it can be omitted). 
+
+
+## Set up log view with Kibana
+
+1. Create the directory `~/kibanaconf` on the remote server
+2. Create signed SSL key/cert pair named `nginx.crt` and `nginx.key` and place them in the `~/kibanaconf` directory. (*You probably want to use the same SSL certificate for Kibana and the ZNC server if you intend to run these on the same host*)
+3. Set two local environment variables, `USERNAME` and `PASSWORD`, which will be used to restrict access to the log view
+
+If you have less than 512 MB of RAM on the server, you may want to enable swap, as logstash tends to use around 500 MB when reading in logs for the first time:
+
+`ansible-playbook kibana.yml  -vvvv`
+
+After you have done this, simply run 
+
+`ansible-playbook kibana.yml  -vvvv`
