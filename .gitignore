@@ -1,0 +1,6 @@
+.DS_Store
+.vagrant
+*.pem
+*.crt
+*.key
+htpasswd
