@@ -13,7 +13,9 @@
 
 After you have done this, simply run 
 
-`ansible-playbook znc.yml -vvvv`
+````sh
+$ ansible-playbook znc.yml -vvvv
+````
 
 (The `-vvvv` argument sets ansible logging to the most verbose mode, which includes connection debugging. If this is not needed, it can be omitted). 
 
@@ -26,8 +28,12 @@ After you have done this, simply run
 
 If you have less than 512 MB of RAM on the server, you may want to enable swap, as logstash tends to use around 500 MB when reading in logs for the first time:
 
-`ansible-playbook kibana.yml  -vvvv`
+````sh
+$ ansible-playbook kibana.yml  -vvvv
+````
 
 After you have done this, simply run 
 
-`ansible-playbook kibana.yml  -vvvv`
+````sh
+$ ansible-playbook kibana.yml  -vvvv
+````
