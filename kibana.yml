@@ -1,0 +1,19 @@
+---
+- hosts: znc
+
+  tasks: 
+
+  - name: Install pip
+    apt: name="python-pip" state=present
+
+  - name: Install Docker-py
+    pip: name=docker-py
+
+  - name: Install passlib
+    apt: name=python-passlib
+
+  - name: Add user to htpasswd
+    htpasswd: path="~/kibanaconf/htpasswd" name="{{ lookup('env','USERNAME') }}" password="{{ lookup('env','PASSWORD') }}" state=present
+
+  - name: Run docker container
+    docker: image="logstash" ports="443:443,80:80" env="LOGSTASH_CONFIG_URL=https://gist.githubusercontent.com/ChimeraCoder/8e05854a8de46d88b87f/raw/28d9cf8e77a69a9ee96d8d33e8e583ddf38a01b9/gistfile1.txt" volumes="~/.znc:/znc-data,~/kibanaconf:/kibanaconf"
