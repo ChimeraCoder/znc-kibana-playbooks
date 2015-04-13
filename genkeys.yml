@@ -1,0 +1,25 @@
+---
+- hosts: znc
+
+  tasks: 
+
+
+  - name: Make znc config directory
+    file: path="~/znc-default" state=directory
+
+
+    # http://serialized.net/2013/04/simply-generating-self-signed-ssl-certs-with-ansible/
+  - name: Generate a self-signed certificate
+    command:  openssl req -new -nodes -x509 -subj "/C=US/ST=Oregon/L=Portland/O=IT/CN={{lookup('env', FQDN')}}" -days 3650 -keyout "~/znc-default/server.key" -out "~/znc-default/server.crt" -extensions v3_ca creates="~/znc-default/server.crt"
+
+  - name: Create znc.pem
+    command: cat your-certificate-private.key > znc.pem
+
+  - name: Add the crt file to znc.pem
+    command: cat your-certificate.crt >> znc.pem
+
+  - name: Create Diffie-Hellman key exchange parameters
+    command: openssl dhparam -out dhparam.pem 2048
+    
+  - name: Append Diffie-Hellman key parameters to znc.pem
+    command: cat dhparam.pem >> znc.pem
