@@ -2,9 +2,11 @@
 - hosts: znc
 
   tasks: 
-  - name: Copy docker-znc data directory
+    
+  # Optional: If restoring from a local backup of the config
+  #- name: Copy docker-znc data directory
     # Update src to the actual path of the default znc configuration
-    synchronize: src=docker-znc/znc-default/ dest=~/.znc recursive=yes
+  #  synchronize: src=docker-znc/znc-default/ dest=~/.znc recursive=yes
 
   - name: Install pip
     apt: name="python-pip" state=present
