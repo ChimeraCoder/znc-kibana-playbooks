@@ -29,7 +29,7 @@
     when: ansible_pkg_mgr == 'apt'
 
   - name: Install Docker-py
-    yum: name="docker-py" state=present
+    yum: name="python-docker-py" state=present
     when: ansible_pkg_mgr == 'yum'
 
   - name: Run docker container
