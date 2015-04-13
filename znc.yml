@@ -10,12 +10,27 @@
 
   - name: Install pip
     apt: name="python-pip" state=present
+    when: ansible_pkg_mgr == 'apt'
+
+  - name: Install pip
+    yum: name="python-pip" state=present
+    when: ansible_pkg_mgr == 'yum'
 
   - name: Install docker
     apt: name="docker.io" state=present
+    when: ansible_pkg_mgr == 'apt'
+
+  - name: Install docker
+    yum: name="docker" state=present
+    when: ansible_pkg_mgr == 'yum'
 
   - name: Install Docker-py
     pip: name=docker-py state=present
+    when: ansible_pkg_mgr == 'apt'
+
+  - name: Install Docker-py
+    yum: name="docker-py" state=present
+    when: ansible_pkg_mgr == 'yum'
 
   - name: Run docker container
     docker: image="chimeracoder/docker-znc-ssl" ports="6697:6697" volumes="~/.znc:/znc-data"
