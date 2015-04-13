@@ -9,7 +9,7 @@
 
 1. Make a default znc config directory: (e.g `mkdir znc-default`.)
 2. Create a [signed SSL cert](http://wiki.znc.in/Signed_SSL_certificate) named `znc.pem` inside the `znc-default` directory.
-3. Update znc.yml to use the path to znc-default
+3. *(optional)* Update znc.yml to use the path to the znc config directory (defaults to `znc-default`)
 
 After you have done this, simply run 
 
