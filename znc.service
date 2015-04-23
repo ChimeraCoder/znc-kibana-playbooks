@@ -1,0 +1,16 @@
+[Unit]
+Description=znc
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=znc
+TimeoutStartSec=0
+EnvironmentFile=/etc/sysconfig/docker-znc-ssl
+ExecStartPre=-/usr/bin/docker kill znc
+ExecStartPre=-/usr/bin/docker rm znc
+ExecStartPre=/usr/bin/docker pull chimeracoder/docker-znc-ssl
+ExecStart=/usr/bin/docker run --name znc -v /home/znc:/znc-data chimeracoder/docker-znc-ssl 
+
+[Install]
+WantedBy=multi-user.target
