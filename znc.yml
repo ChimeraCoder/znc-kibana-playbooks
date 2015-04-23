@@ -41,3 +41,6 @@
 
   - name: Run docker container through systemd
     command: systemctl --user start znc.service 
+
+  - name: Enable docker container at boot through systemd
+    command: systemctl --user enable znc.service 
