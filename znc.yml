@@ -37,7 +37,7 @@
     user: name=znc groups=users,docker append=yes
 
   - name: Copy systemd service file
-    synchronize: src=znc.service dest=/etc/systemd/znc
+    synchronize: src=znc.service dest=/etc/systemd/user/
 
   - name: Enable docker container at boot through systemd
     command: systemctl --user enable znc.service 
