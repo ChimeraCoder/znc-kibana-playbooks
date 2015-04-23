@@ -24,28 +24,16 @@
     yum: name="docker" state=present
     when: ansible_pkg_mgr == 'yum'
 
+  - name: Create docker group
+    group: name=docker state=present
+
   - name: Create znc user
     user: name=znc groups=users,docker append=yes
 
-  - name: Copy dbus service file
-    synchronize: src=dbus.service dest=/etc/systemd/user/
-
-  - name: Copy dbus socket file
-    synchronize: src=dbus.socket dest=/etc/systemd/user/
-
-  - name: Make directory for dbus.conf
-    command: mkdir -p /etc/systemd/system/user@.service.d
- 
-  - name: Copy dbus conf file
-    synchronize: src=dbus.conf dest=/etc/systemd/system/user@.service.d/dbus.conf
-
-  - name: Copy systemd service file
-    synchronize: src=znc.service dest=/etc/systemd/user/
-
-  - name: Activate dbus socket for all users
-    command: systemctl --global enable dbus.socket
-    sudo: yes
+  - name: Start znc service
+    command: systemctl start znc.service 
 
   - name: Enable docker container at boot through systemd
-    command: systemctl --user enable znc.service 
+    command: systemctl enable znc.service 
+    
 

@@ -8,7 +8,7 @@ TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill znc
 ExecStartPre=-/usr/bin/docker rm znc
 ExecStartPre=/usr/bin/docker pull chimeracoder/docker-znc-ssl
-ExecStart=/usr/bin/docker run --name znc -v ~/.znc:/znc-data chimeracoder/docker-znc-ssl 
+ExecStart=/usr/bin/docker run --name znc -v /home/znc/.znc:/znc-data chimeracoder/docker-znc-ssl 
 
 [Install]
 WantedBy=multi-user.target
