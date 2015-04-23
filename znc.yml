@@ -24,15 +24,6 @@
     yum: name="docker" state=present
     when: ansible_pkg_mgr == 'yum'
 
-  - name: Install Docker-py
-    pip: name=docker-py state=present
-    when: ansible_pkg_mgr == 'apt'
-
-  - name: Install Docker-py
-    yum: name="python-docker-py" state=present
-    when: ansible_pkg_mgr == 'yum'
-
-
   - name: Create znc user
     user: name=znc groups=users,docker append=yes
 
