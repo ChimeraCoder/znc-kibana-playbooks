@@ -33,6 +33,9 @@
   - name: Copy dbus socket file
     synchronize: src=dbus.socket dest=/etc/systemd/user/
 
+  - name: Make directory for dbus.conf
+    command: mkdir -p /etc/systemd/system/user@.service.d
+ 
   - name: Copy dbus conf file
     synchronize: src=dbus.conf dest=/etc/systemd/system/user@.service.d/dbus.conf
 
