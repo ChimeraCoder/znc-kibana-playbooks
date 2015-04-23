@@ -32,6 +32,8 @@
     yum: name="python-docker-py" state=present
     when: ansible_pkg_mgr == 'yum'
 
+  - name: Create docker group
+    group: name=docker state=present
 
   - name: Create znc user
     user: name=znc groups=users,docker append=yes
