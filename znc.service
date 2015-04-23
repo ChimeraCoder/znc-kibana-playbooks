@@ -5,7 +5,6 @@ Requires=docker.service
 
 [Service]
 TimeoutStartSec=0
-EnvironmentFile=/etc/sysconfig/docker-znc-ssl
 ExecStartPre=-/usr/bin/docker kill znc
 ExecStartPre=-/usr/bin/docker rm znc
 ExecStartPre=/usr/bin/docker pull chimeracoder/docker-znc-ssl
