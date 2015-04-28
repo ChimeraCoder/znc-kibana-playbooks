@@ -4,8 +4,8 @@
   tasks: 
     
   # Optional: If restoring from a local backup of the config
+  # Update src to the actual path of the default znc configuration
   #- name: Copy docker-znc data directory
-    # Update src to the actual path of the default znc configuration
   #  synchronize: src=docker-znc/znc-default/ dest=~/.znc recursive=yes
 
   - name: Install pip
@@ -32,6 +32,9 @@
 
   - name: Copy systemd service file
     synchronize: src=znc.service dest=/etc/systemd/system/znc.service
+
+  - name: Reload daemon in case the service file changed
+    command: systemctl daemon-reload
 
   - name: Start znc service
     command: systemctl start znc.service 

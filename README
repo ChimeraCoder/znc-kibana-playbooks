@@ -7,9 +7,13 @@
 
 ## Set up ZNC bouncer
 
-1. Make a default znc config directory: (e.g `mkdir znc-default`.)
-2. Create a [signed SSL cert](http://wiki.znc.in/Signed_SSL_certificate) named `znc.pem` inside the `znc-default` directory.
-3. *(optional)* Update znc.yml to use the path to the znc config directory (defaults to `znc-default`)
+1. *(optional)* If restoring from a backup, uncomment the first task in `znc.yml` (If necessary, update znc.yml to use the local path to the backup directory, which defaults to `znc-default`)
+
+2. *(optional* Generate a self-signed SSL cert by running
+
+````sh
+$ ansible-playbook genkeys.yml
+````
 
 After you have done this, simply run 
 
