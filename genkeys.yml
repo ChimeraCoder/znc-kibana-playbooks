@@ -16,13 +16,13 @@
     command:  openssl req -new -nodes -x509 -subj "/C=US/ST=Oregon/L=Portland/O=IT/CN={{lookup('env', FQDN')}}" -days 3650 -keyout "~/.znc/server.key" -out "~/.znc/server.crt" -extensions v3_ca creates="~/.znc/server.crt"
 
   - name: Create znc.pem
-    shell: cat ~/.znc/server.key > znc.pem
+    shell: cat ~/.znc/server.key > ~/.znc/znc.pem
 
   - name: Add the crt file to znc.pem
-    shell: cat ~/.znc/server.crt >> znc.pem
+    shell: cat ~/.znc/server.crt >> ~/.znc/znc.pem
 
   - name: Create Diffie-Hellman key exchange parameters
     command: openssl dhparam -out dhparam.pem 2048
     
   - name: Append Diffie-Hellman key parameters to znc.pem
-    shell: cat dhparam.pem >> znc.pem
+    shell: cat dhparam.pem >> ~/.znc/znc.pem
