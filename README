@@ -14,10 +14,10 @@
 After you have done this, simply run 
 
 ````sh
-$ ansible-playbook znc.yml -vvvv
+$ ansible-playbook znc.yml
 ````
 
-(The `-vvvv` argument sets ansible logging to the most verbose mode, which includes connection debugging. If this is not needed, it can be omitted). 
+If you do not already have a `znc.conf` file in your znc config directory, you need to generate one. After running the above playbook once, run `docker run --name znc -v /home/znc/.znc:/znc-data chimeracoder/docker-znc-ssl --makeconf` (on the remote server) and then run the playbook again.
 
 
 ## Set up log view with Kibana
