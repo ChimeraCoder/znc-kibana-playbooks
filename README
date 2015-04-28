@@ -21,7 +21,13 @@ After you have done this, simply run
 $ ansible-playbook znc.yml
 ````
 
-If you do not already have a `znc.conf` file in your znc config directory, you need to generate one. After running the above playbook once, run `docker run --name znc -v /home/znc/.znc:/znc-data chimeracoder/docker-znc-ssl --makeconf` (on the remote server) and then run the playbook again.
+If you do not already have a `znc.conf` file in your znc config directory, you need to generate one. After running the above playbook once, run the following command on the remote server as root:
+
+````sh
+$ docker run --rm -it -v /home/znc/.znc:/znc-data chimeracoder/docker-znc-ssl --makeconf
+````
+
+and then run the playbook again.
 
 
 ## Set up log view with Kibana
