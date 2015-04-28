@@ -30,6 +30,9 @@
   - name: Create znc user
     user: name=znc groups=users,docker append=yes
 
+  - name: Create .znc config directory if it doesn't exist and ensure permissions
+    file: owner=.znc group=users mode=0777 state=directory
+
   - name: Copy systemd service file
     synchronize: src=znc.service dest=/etc/systemd/system/znc.service
 
