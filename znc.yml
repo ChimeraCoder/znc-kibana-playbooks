@@ -16,8 +16,20 @@
     yum: name="python-pip" state=present
     when: ansible_pkg_mgr == 'yum'
 
+  - name: Add Docker PGP key
+    command: apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+    when: ansible_pkg_mgr == 'apt'
+
+  - name: Install apt-transport-https
+    apt: name="apt-transport-https" state=present
+    when: ansible_pkg_mgr == 'apt'
+
+  - name: Add jessie-backports repository
+    apt_repository: repo='deb https://get.docker.com/ubuntu docker main' state=present update_cache=yes
+    when: ansible_pkg_mgr == 'apt'
+
   - name: Install docker
-    apt: name="docker.io" state=present
+    apt: name="lxc-docker" state=present default_release="docker"
     when: ansible_pkg_mgr == 'apt'
 
   - name: Install docker
