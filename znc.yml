@@ -39,20 +39,17 @@
   - name: Create docker group
     group: name=docker state=present
 
-  - name: Create znc user
-    user: name=znc groups=users,docker append=yes
+  - name: Create znc user with uid 1000
+    user: name=znc uid=1000 groups=users,docker append=yes
 
   - name: Create .znc config directory if it doesn't exist and ensure permissions
-    file: path=~/.znc owner=znc group=users mode=0777 state=directory recurse=yes
+    file: path=/home/znc/.znc owner=znc group=users mode=0777 state=directory recurse=yes
 
   - name: Copy systemd service file
     synchronize: src=znc.service dest=/etc/systemd/system/znc.service
 
   - name: Reload daemon in case the service file changed
     command: systemctl daemon-reload
-
-  - name: Start znc service
-    command: systemctl start znc.service 
 
   - name: Enable docker container at boot through systemd
     command: systemctl enable znc.service 
