@@ -45,6 +45,12 @@
   - name: Create .znc config directory if it doesn't exist and ensure permissions
     file: path=/home/znc/.znc owner=znc group=users mode=0777 state=directory recurse=yes
 
+  - name: Copy certs from ~root to ~znc
+    shell: cp -r ~root/.znc/* ~znc/.znc/
+
+  - name: Fix permissions
+    command: chown -R znc:users /home/znc/.znc
+
   - name: Copy systemd service file
     synchronize: src=znc.service dest=/etc/systemd/system/znc.service
 
